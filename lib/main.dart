@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'MercadosApp.dart';
+import 'ProductosApp.dart';
 
 void main() {
-  runApp(MercadosApp());
+  runApp(ProductosApp());
 }
 
