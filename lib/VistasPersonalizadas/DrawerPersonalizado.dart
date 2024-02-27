@@ -17,21 +17,21 @@ class DrawerPersonalizado extends StatelessWidget{
             ),
             child: Text(
                 style: TextStyle(color: Colors.white),
-                'Header'
+                'Ajustes'
             ),
           ),
           ListTile(
             leading: Icon(Icons.arrow_back_outlined),
             selectedColor: Colors.blue,
             selected: true,
-            title: const Text('Apartado 1'),
+            title: const Text('Cerrar sesión'),
             onTap: () {
               onItemTap!(0);
             },
           ),
           ListTile(
             leading: Icon(Icons.ad_units),
-            title: const Text('Apartado 2'),
+            title: const Text('Registrarse'),
             onTap: () {
               onItemTap!(1);
             },
