@@ -1,4 +1,6 @@
+import 'package:examen/VistasPersonalizadas/SnackBarMensaje.dart';
 import 'package:examen/VistasPersonalizadas/TextEditingPersonalizado.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatelessWidget{
@@ -8,16 +10,28 @@ class RegisterView extends StatelessWidget{
 
   late BuildContext _context;
 
-  void botonAceptar(){
+  void botonAceptar() async{
     if (contrasenyaUsuarioController.text != repiteContrasenyaUsuarioController.text){
-      SnackBar snackBar = SnackBar(
-        content: Text("Las contraseñas no coinciden"),
-      );
-      ScaffoldMessenger.of(_context).showSnackBar(snackBar);
+      SnackBarMensaje().muestraSnackBar(_context, "Las contraseñas no coinciden");
     }
 
     else{
-      Navigator.of(_context).popAndPushNamed('/homeview');
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: correoUsuarioController.text,
+          password: contrasenyaUsuarioController.text,
+        );
+        Navigator.of(_context).popAndPushNamed('/homeview');
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        print(e.toString());
+        SnackBarMensaje().muestraSnackBar(_context, "No se ha podido conectar con la base de datos");
+      }
     }
   }
 
