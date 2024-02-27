@@ -15,6 +15,14 @@ class RegisterView extends StatelessWidget{
       );
       ScaffoldMessenger.of(_context).showSnackBar(snackBar);
     }
+
+    else{
+      Navigator.of(_context).popAndPushNamed('/homeview');
+    }
+  }
+
+  void botonCancelar(){
+
   }
 
 
