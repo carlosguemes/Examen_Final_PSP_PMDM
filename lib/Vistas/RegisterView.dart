@@ -35,10 +35,8 @@ class RegisterView extends StatelessWidget{
   }
 
   void botonCancelar(){
-
+    Navigator.of(_context).popAndPushNamed('/loginview');
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,7 @@ class RegisterView extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.cyan,
         title: const Text('Registro'),
       ),
 
@@ -80,7 +78,7 @@ class RegisterView extends StatelessWidget{
                 child: Text("Aceptar")),),
 
           Padding(padding: EdgeInsets.symmetric(vertical: 10),
-            child: TextButton(onPressed: null,
+            child: TextButton(onPressed: botonCancelar,
                 style: TextButton.styleFrom(foregroundColor: Colors.black),
                 child: Text("Cancelar")),)
         ],)

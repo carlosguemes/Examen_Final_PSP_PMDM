@@ -26,19 +26,23 @@ class LoginView extends StatelessWidget{
     }
   }
 
+  void botonRegistro() {
+    Navigator.of(_context).popAndPushNamed('/registerview');
+  }
+
   @override
   Widget build(BuildContext context) {
     _context = context;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.black,
-        title: const Text('Registro'),
+        backgroundColor: Colors.blue,
+        title: const Text('Login'),
       ),
 
       body: Column(children: [
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-        Text('Identifíquese como nuevo usuario', style: TextStyle(fontSize: 25)),
+        Text('Loguéate con tu usuario', style: TextStyle(fontSize: 25)),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 
         TextEditingPersonalizado(
@@ -61,9 +65,9 @@ class LoginView extends StatelessWidget{
                 child: Text("Aceptar")),),
 
           Padding(padding: EdgeInsets.symmetric(vertical: 10),
-            child: TextButton(onPressed: null,
+            child: TextButton(onPressed: botonRegistro,
                 style: TextButton.styleFrom(foregroundColor: Colors.black),
-                child: Text("Cancelar")),)
+                child: Text("Registro")),)
         ],)
       ]),
     );

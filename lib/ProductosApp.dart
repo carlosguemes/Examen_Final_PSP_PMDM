@@ -9,6 +9,7 @@ class ProductosApp extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         '/registerview': (context) => RegisterView(),
         '/homeview': (context) => HomeView(),
