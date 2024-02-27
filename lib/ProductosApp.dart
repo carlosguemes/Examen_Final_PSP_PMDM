@@ -12,9 +12,9 @@ class ProductosApp extends StatelessWidget{
       routes: {
         '/registerview': (context) => RegisterView(),
         '/homeview': (context) => HomeView(),
-        'loginview': (context) => LoginView(),
+        '/loginview': (context) => LoginView(),
       },
-      initialRoute: '/registerview',
+      initialRoute: '/loginview',
     );
   }
   
