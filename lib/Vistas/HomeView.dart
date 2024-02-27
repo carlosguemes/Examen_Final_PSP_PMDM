@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../FbObjects/FbProducto.dart';
+import '../VistasPersonalizadas/CeldasPersonalizadas.dart';
 import '../VistasPersonalizadas/DrawerPersonalizado.dart';
 import 'LoginView.dart';
 import 'RegisterView.dart';
@@ -54,9 +55,25 @@ class _HomeViewState extends State<HomeView> {
 
     else if (indice == 1){
       for (int i = 0; i < productos.length; i++){
-        print(productos.elementAt(i).nombre);
+        print(productos[i].nombre);
       }
     }
+  }
+
+  void onItemListaClicked(int index){
+
+  }
+
+  Widget creadorCeldas(BuildContext context, int index){
+    return CeldasPersonalizadas(
+      productos: productos,
+      iPosicion: index,
+      onItemListaClickedFunction: onItemListaClicked,
+    );
+  }
+
+  Widget vistaProductos(){
+      return creadorCeldas(context, productos.length);
   }
   
   @override
@@ -68,6 +85,9 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Ajustes")),
+      body: (
+          Center(child: vistaProductos())
+      ),
       drawer: DrawerPersonalizado(onItemTap: eventoDrawerPersonalizado),
     );
   }
