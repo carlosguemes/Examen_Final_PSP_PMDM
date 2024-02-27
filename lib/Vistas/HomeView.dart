@@ -6,6 +6,21 @@ class HomeView extends StatefulWidget{
 }
 
 class _HomeViewState extends State<HomeView> {
+
+  bool esLista = false;
+  void onBottomMenuPressed(int indice) {
+    setState(() {
+      if (indice == 0){
+        esLista = true;
+      }
+      else if (indice == 1){
+        esLista = false;
+      }
+    });
+  }
+  
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
