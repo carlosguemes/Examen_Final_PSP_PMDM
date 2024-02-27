@@ -24,12 +24,11 @@ class RegisterView extends StatelessWidget{
         Navigator.of(_context).popAndPushNamed('/homeview');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
+          SnackBarMensaje().muestraSnackBar(_context, "La contraseña es demasiado débil");
         } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
+          SnackBarMensaje().muestraSnackBar(_context, "El email ya está registrado");
         }
       } catch (e) {
-        print(e.toString());
         SnackBarMensaje().muestraSnackBar(_context, "No se ha podido conectar con la base de datos");
       }
     }
