@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../FbObjects/FbProducto.dart';
 import '../VistasPersonalizadas/DrawerPersonalizado.dart';
 import 'LoginView.dart';
 import 'RegisterView.dart';
@@ -11,6 +13,23 @@ class HomeView extends StatefulWidget{
 }
 
 class _HomeViewState extends State<HomeView> {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  final List<FbProducto> productos = [];
+
+  void descargarProductos() async{
+    CollectionReference<FbProducto> reference = db
+        .collection("Productos")
+        .withConverter(fromFirestore: FbProducto.fromFirestore,
+        toFirestore: (FbProducto post, _) => post.toFirestore());
+
+    QuerySnapshot<FbProducto> querySnap = await reference.get();
+    for (int i = 0; i < querySnap.docs.length; i++){
+      setState(() {
+        productos.add(querySnap.docs[i].data());
+      });
+
+    }
+  }
 
   bool esLista = false;
   void onBottomMenuPressed(int indice) {
@@ -34,15 +53,16 @@ class _HomeViewState extends State<HomeView> {
     }
 
     else if (indice == 1){
-      FirebaseAuth.instance.signOut();
-      Navigator.of(context).pushAndRemoveUntil (
-        MaterialPageRoute (builder: (BuildContext context) => RegisterView()),
-        ModalRoute.withName('/registerview'),
-      );
+      for (int i = 0; i < productos.length; i++){
+        print(productos.elementAt(i).nombre);
+      }
     }
   }
   
-  
+  @override
+  void initState() {
+    descargarProductos();
+  }
   
   @override
   Widget build(BuildContext context) {
