@@ -37,6 +37,7 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       if (indice == 0){
         esLista = true;
+        print('object');
       }
       else if (indice == 1){
         esLista = false;
